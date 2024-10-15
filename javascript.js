@@ -5,6 +5,9 @@ const paperButton = document.querySelector(".paper");
 const scissorsButton = document.querySelector(".scissors");
 const outcome = document.querySelector(".outcome");
 
+const humanScoreSpan = document.querySelector(".human-score");
+const computerScoreSpan = document.querySelector(".computer-score");
+
 
 /*function to get random guess from the computer*/
 
@@ -81,23 +84,50 @@ function playRound (humanChoice, computerChoice) {
     
 }
 
+/*Function to check winner */
+
+const checkWinner = () => {
+    if (humanScore === 5) {
+        const p = document.createElement('p');
+        p.innerText = `You won with a score of ${humanScore}`;
+        outcome.appendChild(p);
+    } else if (computerScore === 5) {
+        const p = document.createElement('p');
+        p.innerText = `The computer won with a score of ${computerScore}`;
+        outcome.appendChild(p);
+    }
+}
+
+/* Function to update scores */
+
+const updateScore = (humanScore, computerScore) => {
+    humanScoreSpan.innerText = `Your Score: ${humanScore}`;
+    computerScoreSpan.innerText = `Computer Score: ${computerScore}`;
+};
+
 /* Event listeners for buttons*/
 
 rockButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
     const humanSelection = 'rock';
     playRound(humanSelection, computerSelection);
+    updateScore(humanScore, computerScore);
+    checkWinner();
 })
 
 paperButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
     const humanSelection = 'paper';
     playRound(humanSelection, computerSelection);
+    updateScore(humanScore, computerScore);
+    checkWinner();
 })
 
 scissorsButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
     const humanSelection = 'scissors';
     playRound(humanSelection, computerSelection);
+    updateScore(humanScore, computerScore);
+    checkWinner();
 })
 
